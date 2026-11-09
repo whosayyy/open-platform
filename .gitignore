@@ -1,0 +1,74 @@
+# Java
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# IDE - IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.settings/
+.project
+.classpath
+*.prefs
+
+# IDE - VS Code
+.vscode/
+
+# IDE - Eclipse
+bin/
+.settings/
+.metadata/
+*.tmp
+*.class
+*.jar
+
+# OS
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# Logs
+logs/
+*.log
+
+# Spring Boot
+**/application-dev.yaml
+**/application-local.yaml
+**/application-prod.yaml
+
+# Env
+.env
+.env.local
+*.env
+
+# Temp
+tmp/
+temp/
+*.pid
+*.swp
+*.swo
+*~
+
+# Checkstyle
+checkstyle-output.xml
+# WorkBuddy project memory
+.workbuddy/

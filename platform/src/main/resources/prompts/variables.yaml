@@ -1,0 +1,53 @@
+---
+variables:
+  - name: currentTime
+    type: datetime
+    format: "yyyy-MM-dd HH:mm:ss"
+    source: system
+    description: 当前系统时间，用于 Prompt 中的时间参考
+    cacheable: false
+
+  - name: conversationContext
+    type: string
+    source: memory
+    provider: SessionMemoryManager.buildConversationContext
+    description: 当前会话的对话历史
+    cacheable: false
+    default: ""
+
+  - name: ragContext
+    type: string
+    source: knowledge
+    provider: KnowledgeRegistry.retrieve
+    description: 知识库检索到的文档内容（由 KnowledgeRegistry 统一提供）
+    cacheable: false
+    default: "暂无相关知识库信息"
+
+  - name: userId
+    type: long
+    source: security
+    provider: GetLoginUserUtil.getUserId
+    description: 当前登录用户ID（匿名用户为 null）
+    cacheable: false
+
+  - name: userName
+    type: string
+    source: security
+    provider: GetLoginUserUtil.getNickname
+    description: 当前登录用户昵称
+    cacheable: false
+    default: "用户"
+
+  - name: tools
+    type: list
+    source: function
+    provider: FunctionRegistry.getToolInfos
+    description: 当前 Skill 可用的工具列表
+    cacheable: true
+
+  - name: contentPolicyUrl
+    type: string
+    source: config
+    description: 平台内容政策链接
+    cacheable: true
+    default: "https://wkc.example.com/policy/content"

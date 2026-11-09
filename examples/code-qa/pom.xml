@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yin.examples</groupId>
+    <artifactId>open-platform-code-qa-example</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Open Platform — Code QA Consumer Example</name>
+    <description>
+        真实消费者示例：代码库问答助手。不依赖 Spring，不依赖任何业务模块，
+        只使用 open-platform 的 quickstart 门面与 core.tool SPI。
+        验证平台抽象是否在新闻领域之外成立。
+    </description>
+
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.yin</groupId>
+            <artifactId>open-platform</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--
+            业务门面 Agent / Result 位于独立模块 open-platform-quickstart。
+            非 Spring 消费者需要显式引入；Spring Boot 消费者引入
+            open-platform-server 时会传递带入。
+        -->
+        <dependency>
+            <groupId>com.yin</groupId>
+            <artifactId>open-platform-quickstart</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--
+            平台把 Jackson / Spring / Redis 等基础设施声明为 optional，不会传递给消费方。
+            这是正确的库设计：消费方只需要显式声明自己真正用到的东西。
+            本示例的 LIVE 模型适配器需要 Jackson 解析 OpenAI 兼容响应。
+        -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.19.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.11.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.26.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <argLine>--enable-preview</argLine>
+                </configuration>
+            </plugin>
+            <!--
+                平台产物使用了 Java 21 preview API（ScopedValue / StructuredTaskScope），
+                因此加载它的 JVM 必须开启 preview，否则会 UnsupportedClassVersionError。
+
+                注意：这里必须用 exec:exec（另起子进程）而不是 exec:java（在 Maven 进程内运行），
+                因为 exec:java 的 <arguments> 是「程序参数」而非 JVM 参数——把预览开关
+                写在那里会被当成问题文本传给 CLI。
+            -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>run-consumer-demo</id>
+                        <phase>verify</phase>
+                        <goals><goal>exec</goal></goals>
+                        <configuration>
+                            <executable>java</executable>
+                            <classpathScope>runtime</classpathScope>
+                            <arguments>
+                                <argument>--enable-preview</argument>
+                                <argument>-Dstdout.encoding=UTF-8</argument>
+                                <argument>-Dstderr.encoding=UTF-8</argument>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>com.yin.examples.codeqa.CodeQaCli</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--
+                把运行时依赖清单写到 target/cp.txt，供 run.cmd 直接运行（不经 Maven）时使用。
+                这样从命令行手动测试不需要自己拼 classpath。
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.8.1</version>
+                <executions>
+                    <execution>
+                        <id>write-runtime-classpath</id>
+                        <phase>package</phase>
+                        <goals><goal>build-classpath</goal></goals>
+                        <configuration>
+                            <outputFile>${project.build.directory}/cp.txt</outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

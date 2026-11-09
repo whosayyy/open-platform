@@ -1,0 +1,52 @@
+{
+  "name": "wkc-news-test-dataset",
+  "knowledgeBase": "default",
+  "queries": [
+    {
+      "id": "q1",
+      "query": "AI芯片最新进展",
+      "relevantDocIds": ["doc-001", "doc-002", "doc-003"],
+      "relevanceGrades": {
+        "doc-001": 3,
+        "doc-002": 2,
+        "doc-003": 1
+      }
+    },
+    {
+      "id": "q2",
+      "query": "新能源汽车政策",
+      "relevantDocIds": ["doc-004", "doc-005"],
+      "relevanceGrades": {
+        "doc-004": 3,
+        "doc-005": 3
+      }
+    },
+    {
+      "id": "q3",
+      "query": "量子计算突破",
+      "relevantDocIds": ["doc-006"],
+      "relevanceGrades": {
+        "doc-006": 3
+      }
+    },
+    {
+      "id": "q4",
+      "query": "Spring Boot 3 新特性",
+      "relevantDocIds": ["doc-007", "doc-008", "doc-009", "doc-010"],
+      "relevanceGrades": {
+        "doc-007": 2,
+        "doc-008": 1,
+        "doc-009": 3,
+        "doc-010": 2
+      }
+    },
+    {
+      "id": "q5",
+      "query": "2026年世界经济展望",
+      "relevantDocIds": ["doc-011"],
+      "relevanceGrades": {
+        "doc-011": 3
+      }
+    }
+  ]
+}

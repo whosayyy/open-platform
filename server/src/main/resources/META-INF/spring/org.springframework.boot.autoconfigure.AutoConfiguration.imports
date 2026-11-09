@@ -1,0 +1,3 @@
+com.yin.ai.platform.starter.AiPlatformAgentEventAutoConfiguration
+com.yin.ai.platform.starter.AiPlatformAgentRedisAutoConfiguration
+com.yin.ai.platform.starter.AiPlatformCoreAutoConfiguration

@@ -1,0 +1,22 @@
+---
+name: output-format
+version: "1.0.0"
+description: 输出格式要求，跨 summary/review/hot-news 共享
+
+fragment: |
+  ## 输出格式要求
+
+  1. 使用 Markdown 格式组织回复
+  2. 使用 ### 标题分隔不同部分
+  3. 列表使用有序或无序列表
+  4. 关键信息使用 **加粗** 强调
+  5. 不要使用表格（除非用户明确要求）
+  6. 回复结尾不要追问用户
+
+variables: []
+
+changelog:
+  - version: "1.0.0"
+    date: 2026-06-30
+    author: yin
+    change: 初始版本
