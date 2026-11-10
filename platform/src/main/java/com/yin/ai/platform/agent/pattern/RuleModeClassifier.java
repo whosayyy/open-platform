@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 
 /**
  * 规则分类器 — 基于启发式规则快速分类，零 LLM 开销。

@@ -1,6 +1,7 @@
 package com.yin.ai.platform.agent.pattern;
 
 import java.util.List;
+import com.yin.ai.platform.core.agent.pattern.StepType;
 
 /**
  * 执行计划中的单个步骤。

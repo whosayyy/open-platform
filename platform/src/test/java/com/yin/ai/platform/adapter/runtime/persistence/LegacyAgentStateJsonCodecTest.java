@@ -1,6 +1,6 @@
 package com.yin.ai.platform.adapter.runtime.persistence;
 
-import com.yin.ai.platform.agent.pattern.AgentMode;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 import com.yin.ai.platform.agent.pattern.ContextSnapshot;
 import com.yin.ai.platform.agent.pattern.TaskPlan;
 import com.yin.ai.platform.agent.pattern.TaskStep;

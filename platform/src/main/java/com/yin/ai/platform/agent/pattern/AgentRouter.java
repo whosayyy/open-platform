@@ -1,5 +1,7 @@
 package com.yin.ai.platform.agent.pattern;
 
+import com.yin.ai.platform.core.agent.mode.AgentMode;
+
 /**
  * 统一 Agent 路由器 — 收敛现有分散的路由逻辑。
  * <p>

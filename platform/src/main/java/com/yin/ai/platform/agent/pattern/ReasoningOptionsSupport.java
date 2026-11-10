@@ -6,6 +6,8 @@ import com.yin.ai.platform.gateway.reasoning.ReasoningPolicy;
 import org.springframework.ai.openai.OpenAiChatOptions;
 
 import java.util.EnumSet;
+import com.yin.ai.platform.core.agent.pattern.ReasoningMode;
+import com.yin.ai.platform.core.agent.pattern.StepType;
 
 /** Shared provider-neutral reasoning resolution for every Agent pattern. */
 public final class ReasoningOptionsSupport {

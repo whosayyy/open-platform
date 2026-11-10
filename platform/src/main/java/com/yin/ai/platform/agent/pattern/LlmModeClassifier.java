@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.Optional;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 
 /**
  * LLM 模式分类器 — 规则链全部无法判断时兜底，用 LLM 决策执行模式。

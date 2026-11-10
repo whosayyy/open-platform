@@ -5,6 +5,7 @@ import com.yin.ai.platform.agent.task.TaskState;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 
 /**
  * 不可变上下文快照 — 用于 Redis 序列化和中断恢复。

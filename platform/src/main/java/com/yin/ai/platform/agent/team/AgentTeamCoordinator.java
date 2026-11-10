@@ -8,7 +8,7 @@ import com.yin.ai.platform.agent.AgentTask;
 import com.yin.ai.platform.agent.event.AgentEvent;
 import com.yin.ai.platform.agent.event.TaskEventType;
 import com.yin.ai.platform.agent.pattern.AgentExecutionContext;
-import com.yin.ai.platform.agent.pattern.AgentMode;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 import com.yin.ai.platform.agent.pattern.Artifact;
 import com.yin.ai.platform.agent.task.ContextStore;
 import com.yin.ai.platform.agent.task.TaskCreateRequest;

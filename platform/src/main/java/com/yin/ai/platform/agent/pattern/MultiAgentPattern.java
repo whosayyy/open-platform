@@ -4,6 +4,7 @@ import com.yin.ai.platform.agent.event.AgentEvent;
 import com.yin.ai.platform.agent.event.EventPublisher;
 import com.yin.ai.platform.agent.team.AgentTeamCoordinator;
 import reactor.core.publisher.Flux;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 
 /** Unified Runtime pattern for the bounded creator research team. */
 public class MultiAgentPattern implements AgentPattern {

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 
 /**
  * 验证 {@link RuleModeClassifier} 的启发式规则路由：

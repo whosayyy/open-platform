@@ -10,6 +10,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 
 class AgentExecutionContextStepRecordTest {
 

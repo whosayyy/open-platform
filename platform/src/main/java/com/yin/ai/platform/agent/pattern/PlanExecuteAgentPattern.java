@@ -40,6 +40,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
+import com.yin.ai.platform.core.agent.pattern.StepType;
 
 /**
  * PLAN_EXECUTE 模式 — 企业级规划-执行引擎。

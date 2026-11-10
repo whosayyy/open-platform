@@ -442,31 +442,40 @@ Secrets must come from environment variables or the deployment platform, never f
 Modules are ordered bottom-up; the dependency graph is a single acyclic chain.
 
 ```text
-core ─┬─> document ──────┐
-      ├─> security ──┬───┤
-      ├─> rollout ───┤   │
-      │              ├─> engine ─┐
-      └─> quickstart ┘           ├─> platform ─┬─> legacy
-                                 │             └─> server
-                                 └─────────────┘
+core ─┬─> document ────────────────────────────┐
+      ├─> security ──┐                         │
+      ├─> rollout ───┴─> engine ─> gateway ─> workflow ─┤
+      └─> quickstart ──────────────────────────┤        │
+                                               │        ├─> platform ─┬─> legacy
+                                               └────────┘             └─> server
 ```
 
-Precisely: `engine` depends on `core` + `security` (stream buffering config); `platform`
-depends on `core` / `document` / `security` / `rollout` / `engine`.
+Dependency notes:
+
+- `engine` depends on `core` + `security` (stream buffering config).
+- `gateway` (including `structured`) depends on `core` / `engine` / `security` / `rollout`.
+- `workflow` depends on `core` / `engine` / `gateway`.
+- `platform` depends on core / document / security / rollout / engine / gateway / workflow.
 
 | Module | Coordinates | Contents | Files | Tests |
 | --- | --- | --- | ---: | ---: |
-| Core | `com.yin:open-platform-core` | Framework-neutral contracts: Agent Runtime, four patterns, Model/Tool/Memory/RAG ports, `ExecutionContext`, minimal identity types | 175 | 120 |
+| Core | `com.yin:open-platform-core` | Framework-neutral contracts: Agent Runtime, four patterns, Model/Tool/Memory/RAG ports, `ExecutionContext`, minimal identity types, shared enums | 178 | 120 |
 | Document | `com.yin:open-platform-document` | Parsing (PDF/DOCX/XLSX/PPTX/HTML/Markdown/TXT), cleaning, chunking, AST | 56 | 103 |
 | Security | `com.yin:open-platform-security` | JWT filter, sensitive-word DFA, internal API HMAC, security chain, feature flags | 15 | — |
 | Rollout | `com.yin:open-platform-rollout` | Rollout switches | 2 | 1 |
-| **Engine** | `com.yin:open-platform-engine` | Execution engine, timeouts and cancellation, task management, distributed concurrency guard; streaming packets (`SinkStreamProducer` / `StreamMetrics` / `StreamPacket`) | 19 | 10 |
+| **Engine** | `com.yin:open-platform-engine` | Execution engine, timeouts and cancellation, task management, concurrency guard, `TaskCanceller` port, streaming packets, shared `AiMetrics` | 21 | 10 |
+| **Gateway** | `com.yin:open-platform-gateway` | Unified model invocation, filter chain, model routing and circuit breaking, semantic cache, input/output guards, `ToolCallbackResolver` port, structured output | 117 | 187 |
+| **Workflow** | `com.yin:open-platform-workflow` | Step scheduling, stage prompts, idempotent stores, retries and SSE event publishing | 58 | 8 |
 | Quickstart | `com.yin:open-platform-quickstart` | Business facade: `Agent` / `Result` / `ModelClients` | 3 | 8 |
-| Platform | **`com.yin:open-platform`** | Agent orchestration, gateway, memory, RAG, function, prompt, workflow, observability, adapters | 643 | 1056 |
+| Platform | **`com.yin:open-platform`** | Agent orchestration, memory, RAG, function, prompt, observability, adapters | 465 | 861 |
 | Legacy | `com.yin:open-platform-legacy` | V1 → V2 migration bridge | 2 | — |
 | Server | `com.yin:open-platform-server` | Spring Boot auto-configuration entry | 10 | 21 |
+| | | **Total** | **927** | **1319** |
 
-> Depending on `com.yin:open-platform` transitively brings in core / document / security / rollout / engine.
+> Depending on `com.yin:open-platform` transitively brings in core / document / security / rollout /
+> engine / gateway / workflow. `platform` is still a 9-package strongly connected block
+> (agent ↔ memory ↔ adapter ↔ rag ↔ function ↔ observe ↔ prompt ↔ runtime ↔ knowledge); further
+> splitting requires breaking those cycles first.
 
 **Which artifact to depend on:**
 
@@ -520,10 +529,17 @@ open-platform/
 │   ├── *                       # execution engine, task manager, timeouts, TaskCanceller port
 │   ├── bridge/  config/        # Reactor context bridge, concurrency guard, Spring config
 │   └── stream/                 # StreamPacket, SinkStreamProducer, StreamMetrics
+├── gateway/src/main/java/com/yin/ai/platform/
+│   ├── gateway/                # UnifiedChatClient, request/response models, filter/ chain,
+│   │                           #   adapter/ (DeepSeekAdapter, ToolCallbackResolver port),
+│   │                           #   cache/ cost/ guard/ health/ router/ tenant/ audit/ reasoning/, stream/
+│   └── structured/             # StructuredToolGenerator (structured output, same module as gateway)
+├── workflow/src/main/java/com/yin/ai/platform/workflow/
+│   └── *                       # step scheduling, stage prompts, idempotency, retries, SSE
 ├── quickstart/src/main/java/com/yin/ai/platform/quickstart/
 ├── platform/src/main/java/com/yin/ai/platform/
-│   ├── agent/ gateway/ memory/ rag/ function/ runtime/
-│   ├── prompt/ observe/ workflow/ structured/ knowledge/
+│   ├── agent/ memory/ rag/ function/ runtime/
+│   ├── prompt/ observe/ knowledge/
 │   └── adapter/                # Spring, Redis, JDBC, vector store adapters
 ├── platform/src/main/resources/prompts/
 ├── legacy/src/main/java/com/yin/ai/platform/legacy/
@@ -550,8 +566,8 @@ mvn -pl platform -am test
 mvn verify
 ```
 
-Test distribution: `core` 120, `document` 103, `platform` 1056, `server` 21,
-`engine` 10, `quickstart` 8, `rollout` 1 (1319 total).
+Test distribution: `gateway` 187, `core` 120, `document` 103, `platform` 861, `server` 21,
+`engine` 10, `workflow` 8, `quickstart` 8, `rollout` 1 (1319 total).
 
 ### Plain Java smoke test
 

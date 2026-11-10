@@ -1,6 +1,7 @@
 package com.yin.ai.platform.agent.pattern;
 
 import java.util.Optional;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 
 /**
  * 模式分类器 SPI — AgentRouter 内部的分类链节点。

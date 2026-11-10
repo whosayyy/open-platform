@@ -1,6 +1,6 @@
 package com.yin.ai.platform.agent.task;
 
-import com.yin.ai.platform.agent.pattern.AgentMode;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 import com.yin.ai.platform.agent.pattern.TaskPlan;
 
 import java.time.Instant;

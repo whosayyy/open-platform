@@ -1,7 +1,7 @@
 package com.yin.ai.platform.knowledge;
 
 import com.yin.ai.platform.knowledge.KnowledgeProperties.KnowledgeBaseConfig;
-import com.yin.ai.platform.observe.AiMetrics;
+import com.yin.ai.platform.engine.metrics.AiMetrics;
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.embedding.EmbeddingModel;

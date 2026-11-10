@@ -17,7 +17,7 @@ import com.yin.ai.platform.engine.stream.StreamPacket;
 import com.yin.ai.platform.core.skill.SkillLoader;
 import com.yin.ai.platform.core.skill.SkillManifest;
 import com.yin.ai.platform.memory.SessionMemoryManager;
-import com.yin.ai.platform.observe.AiMetrics;
+import com.yin.ai.platform.engine.metrics.AiMetrics;
 import com.yin.ai.platform.observe.RouterFirstMonitor;
 import com.yin.ai.platform.knowledge.KnowledgeRegistry;
 import com.yin.ai.platform.runtime.postprocess.ResponsePostProcessorChain;

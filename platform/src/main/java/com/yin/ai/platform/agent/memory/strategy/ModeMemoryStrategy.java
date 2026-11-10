@@ -1,6 +1,6 @@
 package com.yin.ai.platform.agent.memory.strategy;
 
-import com.yin.ai.platform.agent.pattern.AgentMode;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 import com.yin.ai.platform.core.memory.MemoryType;
 
 import java.util.Set;

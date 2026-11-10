@@ -1,6 +1,6 @@
 package com.yin.ai.platform.function;
 
-import com.yin.ai.platform.observe.AiMetrics;
+import com.yin.ai.platform.engine.metrics.AiMetrics;
 import lombok.extern.slf4j.Slf4j;
 
 /**

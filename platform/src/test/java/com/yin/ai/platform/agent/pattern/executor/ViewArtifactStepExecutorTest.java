@@ -3,7 +3,7 @@ package com.yin.ai.platform.agent.pattern.executor;
 import com.yin.ai.platform.core.runtime.step.StepExecutorResult;
 import com.yin.ai.platform.agent.event.EventPublisher;
 import com.yin.ai.platform.agent.pattern.AgentExecutionContext;
-import com.yin.ai.platform.agent.pattern.AgentMode;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 import com.yin.ai.platform.agent.pattern.TaskPlan;
 import com.yin.ai.platform.agent.pattern.TaskStep;
 import com.yin.ai.platform.agent.task.ContextStore;

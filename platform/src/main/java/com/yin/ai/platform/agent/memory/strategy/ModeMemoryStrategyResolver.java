@@ -1,7 +1,7 @@
 package com.yin.ai.platform.agent.memory.strategy;
 
 import com.yin.ai.platform.agent.pattern.AgentExecutionContext;
-import com.yin.ai.platform.agent.pattern.AgentMode;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 
 /**
  * 模式记忆策略解析器 — 根据 AgentMode + 任务上下文解析最终策略。

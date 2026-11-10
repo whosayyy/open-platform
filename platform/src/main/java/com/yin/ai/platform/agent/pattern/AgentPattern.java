@@ -2,6 +2,7 @@ package com.yin.ai.platform.agent.pattern;
 
 import com.yin.ai.platform.agent.event.AgentEvent;
 import reactor.core.publisher.Flux;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 
 /**
  * Agent 执行模式 SPI — 每种 AgentMode 对应一个实现。

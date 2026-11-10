@@ -25,6 +25,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 
 /**
  * 统一 Agent Runtime — 所有模式的唯一入口。

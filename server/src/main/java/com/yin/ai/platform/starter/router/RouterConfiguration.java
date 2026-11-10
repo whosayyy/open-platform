@@ -16,7 +16,7 @@ import com.yin.ai.platform.core.router.matcher.RegexMatcher;
 import com.yin.ai.platform.core.router.matcher.RuleMatcher;
 import com.yin.ai.platform.core.router.query.QueryNormalizer;
 import com.yin.ai.platform.core.router.query.QuerySynonymSource;
-import com.yin.ai.platform.observe.AiMetrics;
+import com.yin.ai.platform.engine.metrics.AiMetrics;
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;

@@ -2,6 +2,7 @@ package com.yin.ai.platform.agent.pattern;
 
 import com.yin.ai.platform.agent.event.AgentEvent;
 import reactor.core.publisher.Flux;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 
 /**
  * Compatibility seam used while the Spring-managed runtime delegates pattern

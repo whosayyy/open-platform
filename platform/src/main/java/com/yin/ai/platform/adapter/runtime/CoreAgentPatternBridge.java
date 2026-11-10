@@ -116,7 +116,7 @@ public final class CoreAgentPatternBridge implements AgentPatternBridge {
     }
 
     @Override
-    public boolean supports(com.yin.ai.platform.agent.pattern.AgentMode mode,
+    public boolean supports(com.yin.ai.platform.core.agent.mode.AgentMode mode,
                             AgentExecutionContext context, boolean resuming) {
         if (!policy.enabled() || mode == null || context == null) return false;
         com.yin.ai.platform.core.agent.pattern.AgentMode coreMode = coreMode(mode);
@@ -134,7 +134,7 @@ public final class CoreAgentPatternBridge implements AgentPatternBridge {
     }
 
     @Override
-    public Flux<AgentEvent> execute(com.yin.ai.platform.agent.pattern.AgentMode mode,
+    public Flux<AgentEvent> execute(com.yin.ai.platform.core.agent.mode.AgentMode mode,
                                     AgentExecutionContext context) {
         com.yin.ai.platform.core.agent.pattern.AgentMode coreMode = coreMode(mode);
         AgentPattern pattern = coreMode == null ? null : patterns.get(coreMode);
@@ -381,8 +381,8 @@ public final class CoreAgentPatternBridge implements AgentPatternBridge {
     }
 
     private static com.yin.ai.platform.core.agent.pattern.AgentMode coreMode(
-            com.yin.ai.platform.agent.pattern.AgentMode mode) {
-        if (mode == null || mode == com.yin.ai.platform.agent.pattern.AgentMode.MULTI_AGENT) {
+            com.yin.ai.platform.core.agent.mode.AgentMode mode) {
+        if (mode == null || mode == com.yin.ai.platform.core.agent.mode.AgentMode.MULTI_AGENT) {
             return null;
         }
         return com.yin.ai.platform.core.agent.pattern.AgentMode.valueOf(mode.name());

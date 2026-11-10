@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 
 /**
  * 默认 Agent 路由器 — 组合多个 ModeClassifier 形成分类链。

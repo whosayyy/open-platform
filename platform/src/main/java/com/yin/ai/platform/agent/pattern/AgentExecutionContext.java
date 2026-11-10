@@ -16,6 +16,8 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
+import com.yin.ai.platform.core.agent.pattern.StepType;
 
 /**
  * 统一执行上下文 — 所有 Agent Pattern 的共享状态载体。

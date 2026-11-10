@@ -1,7 +1,7 @@
 package com.yin.ai.platform.adapter.router.observability;
 
 import com.yin.ai.platform.core.router.RouterTelemetry;
-import com.yin.ai.platform.observe.AiMetrics;
+import com.yin.ai.platform.engine.metrics.AiMetrics;
 
 /** Bridges core router telemetry to the platform's Micrometer-backed metrics facade. */
 public final class AiMetricsRouterTelemetry implements RouterTelemetry {

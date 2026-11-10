@@ -1,6 +1,6 @@
 package com.yin.ai.platform.agent.event;
 
-import com.yin.ai.platform.agent.pattern.ReasoningMode;
+import com.yin.ai.platform.core.agent.pattern.ReasoningMode;
 import com.yin.ai.platform.agent.pattern.StepResult;
 import com.yin.ai.platform.agent.pattern.StepSummary;
 import com.yin.ai.platform.gateway.ModelExecutionOptions;

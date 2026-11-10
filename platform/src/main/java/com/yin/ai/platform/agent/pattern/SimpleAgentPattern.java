@@ -8,6 +8,8 @@ import com.yin.ai.platform.gateway.TokenUsage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
+import com.yin.ai.platform.core.agent.pattern.StepType;
 
 /**
  * SIMPLE 模式 — 单次 LLM 调用，无工具、无多步。

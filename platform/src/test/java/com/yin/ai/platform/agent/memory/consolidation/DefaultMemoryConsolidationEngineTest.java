@@ -3,7 +3,7 @@ package com.yin.ai.platform.agent.memory.consolidation;
 import com.yin.ai.platform.agent.event.EventPublisher;
 import com.yin.ai.platform.agent.memory.strategy.ModeMemoryStrategy.ConsolidationPolicy;
 import com.yin.ai.platform.agent.pattern.AgentExecutionContext;
-import com.yin.ai.platform.agent.pattern.AgentMode;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 import com.yin.ai.platform.agent.task.ContextStore;
 import com.yin.ai.platform.core.memory.api.MemoryRuntime;
 import com.yin.ai.platform.core.memory.MemoryCell;

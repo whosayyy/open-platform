@@ -1,6 +1,6 @@
 package com.yin.ai.platform.observe.config;
 
-import com.yin.ai.platform.observe.AiMetrics;
+import com.yin.ai.platform.engine.metrics.AiMetrics;
 import com.yin.ai.platform.observe.slo.SloAlerting;
 import com.yin.ai.platform.observe.slo.SloCalculator;
 import io.micrometer.core.instrument.MeterRegistry;

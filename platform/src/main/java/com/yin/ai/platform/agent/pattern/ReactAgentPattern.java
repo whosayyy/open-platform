@@ -13,6 +13,8 @@ import reactor.core.publisher.Flux;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
+import com.yin.ai.platform.core.agent.pattern.StepType;
 
 /**
  * REACT 模式 — 包装现有 ReActLoop，适配统一 Pattern 接口。

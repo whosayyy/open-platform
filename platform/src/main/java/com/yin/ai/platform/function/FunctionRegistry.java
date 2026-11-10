@@ -1,7 +1,8 @@
 package com.yin.ai.platform.function;
 
 import com.yin.ai.platform.function.adapter.SpringAIToolAdapter;
-import com.yin.ai.platform.observe.AiMetrics;
+import com.yin.ai.platform.engine.metrics.AiMetrics;
+import com.yin.ai.platform.gateway.adapter.ToolCallbackResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.context.ApplicationContext;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
  * 提供按名称调用、并行调用、获取 LLM 可调用 ToolCallback 等功能。
  */
 @Slf4j
-public class FunctionRegistry implements ApplicationContextAware {
+public class FunctionRegistry implements ApplicationContextAware, ToolCallbackResolver {
 
     private final Map<String, Function> functions = new ConcurrentHashMap<>();
     private final Map<String, FunctionDefinition> definitions = new ConcurrentHashMap<>();
@@ -180,6 +181,15 @@ public class FunctionRegistry implements ApplicationContextAware {
                 .filter(fn -> fn.getDefinition().getRisk() != FunctionDefinition.Risk.UNSPECIFIED)
                 .map(SpringAIToolAdapter::toToolCallback)
                 .toList();
+    }
+
+    /**
+     * {@link ToolCallbackResolver} 实现：网关通过这个窄端口按名称解析工具，
+     * 因此网关不需要依赖 FunctionRegistry 本身。
+     */
+    @Override
+    public List<ToolCallback> resolve(List<String> functionNames) {
+        return getToolCallbacks(functionNames);
     }
 
     public Optional<Function> get(String name) {

@@ -44,6 +44,14 @@
             <groupId>com.yin</groupId>
             <artifactId>open-platform-engine</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.yin</groupId>
+            <artifactId>open-platform-gateway</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yin</groupId>
+            <artifactId>open-platform-workflow</artifactId>
+        </dependency>
 
         <!-- Spring Boot -->
         <dependency>

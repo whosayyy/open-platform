@@ -9,7 +9,7 @@ import com.yin.ai.platform.engine.stream.SinkStreamProducer;
 import com.yin.ai.platform.knowledge.KnowledgeRegistry;
 import com.yin.ai.platform.core.skill.SkillLoader;
 import com.yin.ai.platform.memory.SessionMemoryManager;
-import com.yin.ai.platform.observe.AiMetrics;
+import com.yin.ai.platform.engine.metrics.AiMetrics;
 import com.yin.ai.platform.runtime.DefaultSkillRuntime;
 import com.yin.ai.platform.runtime.ResponseParser;
 import com.yin.ai.platform.runtime.SkillRuntime;

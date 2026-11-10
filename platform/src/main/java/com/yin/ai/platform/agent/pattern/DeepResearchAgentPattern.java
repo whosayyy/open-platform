@@ -22,6 +22,8 @@ import reactor.core.publisher.Flux;
 
 import java.util.List;
 import java.util.Map;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
+import com.yin.ai.platform.core.agent.pattern.StepType;
 
 /**
  * DEEP_RESEARCH 模式 — 四阶段深度研究。

@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  *   <li>各 MemoryType 分布</li>
  * </ul>
  * <p>
- * 遵循 {@link com.yin.ai.platform.observe.AiMetrics} 模式，
+ * 遵循 {@link com.yin.ai.platform.engine.metrics.AiMetrics} 模式，
  * 使用 Micrometer Counter + Timer，支持 Prometheus / InfluxDB 等后端。
  */
 public class MemoryMetrics {

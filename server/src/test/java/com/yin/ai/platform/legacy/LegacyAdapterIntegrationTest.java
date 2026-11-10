@@ -113,7 +113,7 @@ class LegacyAdapterIntegrationTest {
         // 8. Router — DefaultIntentRouter + real Matchers
         var normalizer = new QueryNormalizer();
         var cache = new IntentCache(new IntentCacheOptions(true, 100, 60));
-        var metrics = new com.yin.ai.platform.observe.AiMetrics(new SimpleMeterRegistry());
+        var metrics = new com.yin.ai.platform.engine.metrics.AiMetrics(new SimpleMeterRegistry());
 
         // RouterProperties — keyword mappings matching test inputs
         RouterProperties routerProps = new RouterProperties();

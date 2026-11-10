@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
+import com.yin.ai.platform.core.agent.mode.AgentMode;
 
 class AgentExecutionContextStepLimitTest {
 
