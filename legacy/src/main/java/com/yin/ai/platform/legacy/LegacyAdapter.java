@@ -1,6 +1,6 @@
 package com.yin.ai.platform.legacy;
 
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import com.yin.ai.platform.core.router.IntentRouter;
 import com.yin.ai.platform.core.router.RouteContext;
 import com.yin.ai.platform.core.router.RouteResult;

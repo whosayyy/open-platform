@@ -10,7 +10,7 @@ import com.yin.ai.platform.gateway.cost.TokenCostCalculator;
 import com.yin.ai.platform.gateway.model.ModelDefinition;
 import com.yin.ai.platform.gateway.model.ModelRegistry;
 import com.yin.ai.platform.gateway.stream.FinishPacket;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 

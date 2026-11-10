@@ -1,4 +1,4 @@
-package com.yin.ai.platform.gateway.stream;
+package com.yin.ai.platform.engine.stream;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

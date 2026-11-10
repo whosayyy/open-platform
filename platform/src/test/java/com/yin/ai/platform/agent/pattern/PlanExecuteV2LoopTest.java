@@ -16,7 +16,7 @@ import com.yin.ai.platform.agent.task.TaskEngine;
 import com.yin.ai.platform.gateway.GatewayResponse;
 import com.yin.ai.platform.gateway.GatewayTextClient;
 import com.yin.ai.platform.gateway.ModelExecutionOptions;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import com.yin.ai.platform.structured.StructuredClient;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;

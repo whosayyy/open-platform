@@ -5,7 +5,7 @@ import com.yin.ai.platform.engine.TaskManager;
 import com.yin.ai.platform.function.FunctionRegistry;
 import com.yin.ai.platform.gateway.GatewayProperties;
 import com.yin.ai.platform.gateway.UnifiedChatClient;
-import com.yin.ai.platform.gateway.stream.SinkStreamProducer;
+import com.yin.ai.platform.engine.stream.SinkStreamProducer;
 import com.yin.ai.platform.knowledge.KnowledgeRegistry;
 import com.yin.ai.platform.core.skill.SkillLoader;
 import com.yin.ai.platform.memory.SessionMemoryManager;

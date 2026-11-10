@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Set;
 import reactor.core.publisher.Flux;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 
 /**
  * Small high-level facade for plain text generation through the AI Gateway.

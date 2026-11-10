@@ -6,7 +6,7 @@ import com.yin.ai.platform.gateway.GatewayRequest;
 import com.yin.ai.platform.gateway.GatewayResponse;
 import com.yin.ai.platform.gateway.audit.AuditLogEntry;
 import com.yin.ai.platform.gateway.audit.AuditLogStore;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;

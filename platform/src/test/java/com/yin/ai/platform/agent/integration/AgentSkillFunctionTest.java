@@ -8,7 +8,7 @@ import com.yin.ai.platform.core.skill.SkillManifest;
 import com.yin.ai.platform.runtime.SkillExecutionContext;
 import com.yin.ai.platform.runtime.SkillResult;
 import com.yin.ai.platform.runtime.SkillRuntime;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -3,7 +3,7 @@ package com.yin.ai.platform.gateway.filter;
 import com.yin.ai.platform.gateway.GatewayRequest;
 import com.yin.ai.platform.gateway.GatewayResponse;
 import com.yin.ai.platform.gateway.config.RateLimitConfig;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RAtomicLong;
 import org.redisson.api.RedissonClient;

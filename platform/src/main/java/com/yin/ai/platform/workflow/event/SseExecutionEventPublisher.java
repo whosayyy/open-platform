@@ -1,9 +1,9 @@
 package com.yin.ai.platform.workflow.event;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yin.ai.platform.gateway.stream.SinkStreamProducer;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
-import com.yin.ai.platform.gateway.stream.StreamPacketHistoryWriter;
+import com.yin.ai.platform.engine.stream.SinkStreamProducer;
+import com.yin.ai.platform.engine.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacketHistoryWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.ObjectProvider;

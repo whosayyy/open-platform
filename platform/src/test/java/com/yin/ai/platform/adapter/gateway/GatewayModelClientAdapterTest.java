@@ -11,7 +11,7 @@ import com.yin.ai.platform.gateway.GatewayRequest;
 import com.yin.ai.platform.gateway.GatewayResponse;
 import com.yin.ai.platform.gateway.TokenUsage;
 import com.yin.ai.platform.gateway.UnifiedChatClient;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 

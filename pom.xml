@@ -33,6 +33,7 @@
         <module>document</module>
         <module>security</module>
         <module>rollout</module>
+        <module>engine</module>
         <module>quickstart</module>
         <module>platform</module>
         <module>legacy</module>
@@ -80,6 +81,12 @@
 
         <!-- 构建 -->
         <skipTests>false</skipTests>
+        <!--
+            测试 JVM 的内存上限。平台测试都是轻量单元测试，不需要默认的堆大小；
+            在内存紧张的开发机或 CI 上，给 fork 设上限可以避免 metaspace 提交失败
+            导致的 "forked VM terminated without properly saying goodbye"。
+        -->
+        <surefire.jvm.memory>-Xmx768m -XX:MaxMetaspaceSize=384m</surefire.jvm.memory>
         <jacoco.version>0.8.13</jacoco.version>
         <jacocoArgLine></jacocoArgLine>
         <!--
@@ -150,6 +157,11 @@
             <dependency>
                 <groupId>com.yin</groupId>
                 <artifactId>open-platform-rollout</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yin</groupId>
+                <artifactId>open-platform-engine</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -292,7 +304,7 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.2.5</version>
                     <configuration>
-                        <argLine>@{jacocoArgLine} --enable-preview</argLine>
+                        <argLine>@{jacocoArgLine} --enable-preview ${surefire.jvm.memory}</argLine>
                     </configuration>
                 </plugin>
                 <plugin>

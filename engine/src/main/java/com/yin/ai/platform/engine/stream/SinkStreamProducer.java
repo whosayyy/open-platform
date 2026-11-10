@@ -1,8 +1,8 @@
-package com.yin.ai.platform.gateway.stream;
+package com.yin.ai.platform.engine.stream;
 
 import com.yin.ai.platform.config.PipelineConfig;
 import com.yin.ai.platform.engine.EngineProperties;
-import com.yin.ai.platform.engine.TaskManager;
+import com.yin.ai.platform.engine.TaskCanceller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
@@ -30,7 +30,7 @@ public class SinkStreamProducer {
     /** 延迟取消任务追踪（onClientDisconnect=true 时，给前端重连留宽限期） */
     private final ConcurrentHashMap<String, ScheduledFuture<?>> pendingCancels = new ConcurrentHashMap<>();
     private final int bufferSize;
-    private final TaskManager taskManager;
+    private final TaskCanceller taskCanceller;
     private final StreamMetrics metrics;
     private final EngineProperties engineProperties;
     private final ScheduledExecutorService cancelScheduler = Executors.newSingleThreadScheduledExecutor(r -> {
@@ -39,9 +39,10 @@ public class SinkStreamProducer {
         return t;
     });
 
-    public SinkStreamProducer(PipelineConfig config, TaskManager taskManager, StreamMetrics metrics, EngineProperties engineProperties) {
+    public SinkStreamProducer(PipelineConfig config, TaskCanceller taskCanceller,
+                              StreamMetrics metrics, EngineProperties engineProperties) {
         this.bufferSize = config.getSinkBufferSize();
-        this.taskManager = taskManager;
+        this.taskCanceller = taskCanceller;
         this.metrics = metrics;
         this.engineProperties = engineProperties;
     }
@@ -87,7 +88,7 @@ public class SinkStreamProducer {
                     log.info("onClientDisconnect=true，{}s 后取消任务, taskId={}", graceSeconds, taskId);
                     ScheduledFuture<?> future = cancelScheduler.schedule(() -> {
                         log.info("宽限期到期，执行取消, taskId={}", taskId);
-                        taskManager.cancel(taskId);
+                        taskCanceller.cancel(taskId);
                     }, graceSeconds, TimeUnit.SECONDS);
                     ScheduledFuture<?> existing = pendingCancels.put(taskId, future);
                     if (existing != null) existing.cancel(false);

@@ -1,4 +1,4 @@
-package com.yin.ai.platform.gateway.stream;
+package com.yin.ai.platform.engine.stream;
 
 /**
  * Optional durable history bridge for stream packets.

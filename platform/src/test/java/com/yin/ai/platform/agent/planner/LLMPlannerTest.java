@@ -342,7 +342,7 @@ class LLMPlannerTest {
         }
 
         @Override
-        public reactor.core.publisher.Flux<com.yin.ai.platform.gateway.stream.StreamPacket> chatStream(
+        public reactor.core.publisher.Flux<com.yin.ai.platform.engine.stream.StreamPacket> chatStream(
                 GatewayRequest request) {
             throw new UnsupportedOperationException("stream not used in planner");
         }

@@ -72,3 +72,7 @@ temp/
 checkstyle-output.xml
 # WorkBuddy project memory
 .workbuddy/
+
+# JVM crash logs
+hs_err_pid*.log
+replay_pid*.log

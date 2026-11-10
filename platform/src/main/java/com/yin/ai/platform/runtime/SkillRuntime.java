@@ -1,6 +1,6 @@
 package com.yin.ai.platform.runtime;
 
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import reactor.core.publisher.Flux;
 
 import java.util.List;

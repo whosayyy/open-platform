@@ -5,7 +5,7 @@ import com.yin.ai.platform.gateway.GatewayResponse;
 import com.yin.ai.platform.gateway.filter.FilterChain;
 import com.yin.ai.platform.gateway.filter.GatewayFilter;
 import com.yin.ai.platform.gateway.filter.StreamFilterChain;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import com.yin.ai.platform.core.memory.api.MemoryRuntime;
 import com.yin.ai.platform.core.memory.MemoryContext;
 import com.yin.ai.platform.core.memory.MemoryId;

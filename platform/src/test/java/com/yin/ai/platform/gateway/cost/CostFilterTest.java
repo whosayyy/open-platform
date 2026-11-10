@@ -8,7 +8,7 @@ import com.yin.ai.platform.gateway.TokenUsage;
 import com.yin.ai.platform.gateway.filter.CostFilter;
 import com.yin.ai.platform.gateway.filter.FilterChain;
 import com.yin.ai.platform.gateway.stream.FinishPacket;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import com.yin.ai.platform.gateway.model.DefaultModelRegistry;
 import com.yin.ai.platform.gateway.model.ModelDefinition;
 import com.yin.ai.platform.gateway.model.ModelRegistry;

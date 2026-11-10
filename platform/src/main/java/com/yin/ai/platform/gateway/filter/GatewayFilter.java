@@ -2,7 +2,7 @@ package com.yin.ai.platform.gateway.filter;
 
 import com.yin.ai.platform.gateway.GatewayRequest;
 import com.yin.ai.platform.gateway.GatewayResponse;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import reactor.core.publisher.Flux;
 
 /**

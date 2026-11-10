@@ -449,6 +449,13 @@ ExecutionEngine 是平台统一的异步执行边界，提供：
 
 Skill、Function、RAG 和 AI Gateway 不应各自创建线程池；应用应统一配置和使用 ExecutionEngine。
 
+自 v0.0.1 起，执行引擎与流式 packet 生产位于独立模块 `open-platform-engine`：
+
+- `engine.*`：执行引擎、`TaskManager`、超时与取消、分布式并发防护。
+- `engine.stream.*`：`StreamPacket`、`SinkStreamProducer`、`StreamMetrics`、`StreamPacketHistoryWriter`。
+- `engine.TaskCanceller`：流式生产者只需"能取消任务"这一个能力，不再反向依赖整个
+  `TaskManager`；这也消除了两者之间的循环类依赖。
+
 ### 2. Memory
 
 MemoryRuntime 是 Agent、Workflow 和 Skill 访问 Memory 的统一门面：
@@ -677,11 +684,17 @@ mvn -DskipTests package
 多模块结构按依赖方向自下而上排列，整体是一条单向 DAG：
 
 ```text
-core ─┬─> document ─┐
-      ├─> security ─┤
-      ├─> rollout ──┼─> platform ─┬─> legacy
-      └─> quickstart ┘             └─> server
+core ─┬─> document ──────┐
+      ├─> security ──┬───┤
+      ├─> rollout ───┤   │
+      │              ├─> engine ─┐
+      └─> quickstart ┘           ├─> platform ─┬─> legacy
+                                 │             └─> server
+                                 └─────────────┘
 ```
+
+准确说明：`engine` 依赖 `core` + `security`（流式缓冲配置）；`platform` 依赖
+`core` / `document` / `security` / `rollout` / `engine`。
 
 | 模块 | Maven 坐标 | 内容 | 文件 | 测试 |
 | --- | --- | --- | ---: | ---: |
@@ -689,10 +702,13 @@ core ─┬─> document ─┐
 | Document | `com.yin:open-platform-document` | 文档解析（PDF/DOCX/XLSX/PPTX/HTML/Markdown/TXT）、清洗、分块、AST | 56 | 103 |
 | Security | `com.yin:open-platform-security` | JWT 过滤、敏感词 DFA、内部 API HMAC、Security 过滤链、Feature Flag | 15 | — |
 | Rollout | `com.yin:open-platform-rollout` | 灰度开关 | 2 | 1 |
+| **Engine** | `com.yin:open-platform-engine` | 执行引擎、超时与取消、任务管理、分布式并发防护；流式 packet 生产（`SinkStreamProducer` / `StreamMetrics` / `StreamPacket`） | 19 | 10 |
 | Quickstart | `com.yin:open-platform-quickstart` | 业务门面 `Agent` / `Result` / `ModelClients` | 3 | 8 |
-| Platform | **`com.yin:open-platform`** | Agent 编排、Gateway、Engine、Memory、RAG、Function、Prompt、Workflow、Observability、Adapters | 662 | 1066 |
+| Platform | **`com.yin:open-platform`** | Agent 编排、Gateway、Memory、RAG、Function、Prompt、Workflow、Observability、Adapters | 643 | 1056 |
 | Legacy | `com.yin:open-platform-legacy` | V1 → V2 迁移桥 | 2 | — |
 | Server | `com.yin:open-platform-server` | Spring Boot 自动配置入口（`AutoConfiguration.imports`） | 10 | 21 |
+
+> 依赖 `com.yin:open-platform` 会传递带入 core / document / security / rollout / engine。
 
 **作为消费者该引入哪个：**
 
@@ -741,10 +757,13 @@ open-platform/
 │   ├── com/yin/ai/platform/{filter,config}/
 │   └── com/yin/security/filter/          # InternalApiFilter
 ├── rollout/src/main/java/com/yin/ai/platform/rollout/
+├── engine/src/main/java/com/yin/ai/platform/engine/
+│   ├── *                       # 执行引擎、任务管理、超时与取消、TaskCanceller 端口
+│   ├── bridge/  config/        # Reactor 上下文桥接、并发防护、Spring 配置
+│   └── stream/                 # StreamPacket、SinkStreamProducer、StreamMetrics
 ├── quickstart/src/main/java/com/yin/ai/platform/quickstart/
 ├── platform/src/main/java/com/yin/ai/platform/
 │   ├── agent/                  # Agent 编排及历史兼容 API
-│   ├── engine/                 # 执行引擎与上下文传播
 │   ├── gateway/                # 统一模型调用和 Gateway Filter Chain
 │   ├── memory/                 # Memory Runtime、检索、策略和观测
 │   ├── rag/                    # RAG、触发策略、grounding 和评测
@@ -781,8 +800,8 @@ mvn -pl platform -am test
 mvn verify
 ~~~
 
-各模块的测试分布：`core` 120、`document` 103、`platform` 1066、`server` 21、
-`quickstart` 8、`rollout` 1。
+各模块的测试分布：`core` 120、`document` 103、`platform` 1056、`server` 21、
+`engine` 10、`quickstart` 8、`rollout` 1（合计 1319）。
 
 ### 纯 Java Smoke Test
 

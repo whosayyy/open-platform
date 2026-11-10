@@ -4,7 +4,7 @@ import com.yin.ai.platform.engine.ExecutionContext;
 import com.yin.ai.platform.engine.ExecutionContextHolder;
 import com.yin.ai.platform.gateway.GatewayRequest;
 import com.yin.ai.platform.gateway.GatewayResponse;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;

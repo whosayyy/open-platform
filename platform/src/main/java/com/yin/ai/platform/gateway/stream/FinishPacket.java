@@ -1,5 +1,6 @@
 package com.yin.ai.platform.gateway.stream;
 
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import com.yin.ai.platform.gateway.TokenUsage;
 
 /**

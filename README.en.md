@@ -442,11 +442,17 @@ Secrets must come from environment variables or the deployment platform, never f
 Modules are ordered bottom-up; the dependency graph is a single acyclic chain.
 
 ```text
-core ─┬─> document ─┐
-      ├─> security ─┤
-      ├─> rollout ──┼─> platform ─┬─> legacy
-      └─> quickstart ┘             └─> server
+core ─┬─> document ──────┐
+      ├─> security ──┬───┤
+      ├─> rollout ───┤   │
+      │              ├─> engine ─┐
+      └─> quickstart ┘           ├─> platform ─┬─> legacy
+                                 │             └─> server
+                                 └─────────────┘
 ```
+
+Precisely: `engine` depends on `core` + `security` (stream buffering config); `platform`
+depends on `core` / `document` / `security` / `rollout` / `engine`.
 
 | Module | Coordinates | Contents | Files | Tests |
 | --- | --- | --- | ---: | ---: |
@@ -454,10 +460,13 @@ core ─┬─> document ─┐
 | Document | `com.yin:open-platform-document` | Parsing (PDF/DOCX/XLSX/PPTX/HTML/Markdown/TXT), cleaning, chunking, AST | 56 | 103 |
 | Security | `com.yin:open-platform-security` | JWT filter, sensitive-word DFA, internal API HMAC, security chain, feature flags | 15 | — |
 | Rollout | `com.yin:open-platform-rollout` | Rollout switches | 2 | 1 |
+| **Engine** | `com.yin:open-platform-engine` | Execution engine, timeouts and cancellation, task management, distributed concurrency guard; streaming packets (`SinkStreamProducer` / `StreamMetrics` / `StreamPacket`) | 19 | 10 |
 | Quickstart | `com.yin:open-platform-quickstart` | Business facade: `Agent` / `Result` / `ModelClients` | 3 | 8 |
-| Platform | **`com.yin:open-platform`** | Agent orchestration, gateway, engine, memory, RAG, function, prompt, workflow, observability, adapters | 662 | 1066 |
+| Platform | **`com.yin:open-platform`** | Agent orchestration, gateway, memory, RAG, function, prompt, workflow, observability, adapters | 643 | 1056 |
 | Legacy | `com.yin:open-platform-legacy` | V1 → V2 migration bridge | 2 | — |
 | Server | `com.yin:open-platform-server` | Spring Boot auto-configuration entry | 10 | 21 |
+
+> Depending on `com.yin:open-platform` transitively brings in core / document / security / rollout / engine.
 
 **Which artifact to depend on:**
 
@@ -507,9 +516,13 @@ open-platform/
 │   ├── com/yin/ai/platform/{filter,config}/
 │   └── com/yin/security/filter/          # InternalApiFilter
 ├── rollout/src/main/java/com/yin/ai/platform/rollout/
+├── engine/src/main/java/com/yin/ai/platform/engine/
+│   ├── *                       # execution engine, task manager, timeouts, TaskCanceller port
+│   ├── bridge/  config/        # Reactor context bridge, concurrency guard, Spring config
+│   └── stream/                 # StreamPacket, SinkStreamProducer, StreamMetrics
 ├── quickstart/src/main/java/com/yin/ai/platform/quickstart/
 ├── platform/src/main/java/com/yin/ai/platform/
-│   ├── agent/ engine/ gateway/ memory/ rag/ function/ runtime/
+│   ├── agent/ gateway/ memory/ rag/ function/ runtime/
 │   ├── prompt/ observe/ workflow/ structured/ knowledge/
 │   └── adapter/                # Spring, Redis, JDBC, vector store adapters
 ├── platform/src/main/resources/prompts/
@@ -537,8 +550,8 @@ mvn -pl platform -am test
 mvn verify
 ```
 
-Test distribution: `core` 120, `document` 103, `platform` 1066, `server` 21,
-`quickstart` 8, `rollout` 1.
+Test distribution: `core` 120, `document` 103, `platform` 1056, `server` 21,
+`engine` 10, `quickstart` 8, `rollout` 1 (1319 total).
 
 ### Plain Java smoke test
 

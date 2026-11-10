@@ -1,7 +1,7 @@
 package com.yin.ai.platform.gateway;
 
 import com.yin.ai.platform.gateway.filter.GatewayFilterChainExecutor;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;

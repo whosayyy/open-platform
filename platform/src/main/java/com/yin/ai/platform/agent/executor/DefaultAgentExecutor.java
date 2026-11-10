@@ -16,7 +16,7 @@ import com.yin.ai.platform.gateway.GatewayResponse;
 import com.yin.ai.platform.gateway.ModelExecutionOptions;
 import com.yin.ai.platform.gateway.TokenUsage;
 import com.yin.ai.platform.gateway.UnifiedChatClient;
-import com.yin.ai.platform.gateway.stream.StreamPacket;
+import com.yin.ai.platform.engine.stream.StreamPacket;
 import com.yin.ai.platform.rag.enhanced.RetrievedDocument;
 import com.yin.ai.platform.rag.grounding.RagGroundingGuard;
 import org.slf4j.Logger;

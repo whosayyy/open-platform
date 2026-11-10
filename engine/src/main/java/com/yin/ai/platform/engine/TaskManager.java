@@ -2,11 +2,11 @@ package com.yin.ai.platform.engine;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yin.ai.platform.agent.TaskRecoveryCallback;
+import com.yin.ai.platform.engine.TaskRecoveryCallback;
 import com.yin.ai.platform.config.PipelineConfig;
 import com.yin.ai.platform.exception.TooManyTasksException;
-import com.yin.ai.platform.gateway.stream.SinkStreamProducer;
-import com.yin.ai.platform.gateway.stream.StreamMetrics;
+import com.yin.ai.platform.engine.stream.SinkStreamProducer;
+import com.yin.ai.platform.engine.stream.StreamMetrics;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
@@ -34,7 +34,7 @@ import java.util.concurrent.atomic.LongAdder;
  */
 @Slf4j
 @Component
-public class TaskManager {
+public class TaskManager implements TaskCanceller {
 
     private static final String REDIS_TASKS_KEY = "ai:tasks";
     private static final ObjectMapper MAPPER = new ObjectMapper();

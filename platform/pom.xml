@@ -40,6 +40,10 @@
             <groupId>com.yin</groupId>
             <artifactId>open-platform-rollout</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.yin</groupId>
+            <artifactId>open-platform-engine</artifactId>
+        </dependency>
 
         <!-- Spring Boot -->
         <dependency>
