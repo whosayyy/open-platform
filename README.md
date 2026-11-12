@@ -684,39 +684,43 @@ mvn -DskipTests package
 多模块结构按依赖方向自下而上排列，整体是一条单向 DAG：
 
 ```text
-core ─┬─> document ────────────────────────────┐
-      ├─> security ──┐                         │
-      ├─> rollout ───┴─> engine ─> gateway ─> workflow ─┤
-      └─> quickstart ──────────────────────────┤        │
-                                               │        ├─> platform ─┬─> legacy
-                                               └────────┘             └─> server
+core
+├── document
+├── security ──> engine ──> gateway ──┬──> workflow
+├── rollout                          ├──> function
+└── quickstart                       └──> observe
+                                        │
+                     platform <─────────┘
+                       ├──> legacy
+                       └──> server（同时依赖 core 与 quickstart）
 ```
 
 依赖要点：
 
 - `engine` 依赖 `core` + `security`（流式缓冲配置）。
 - `gateway`（含 `structured`）依赖 `core` / `engine` / `security` / `rollout`。
-- `workflow` 依赖 `core` / `engine` / `gateway`。
-- `platform` 依赖 core / document / security / rollout / engine / gateway / workflow。
+- `workflow`、`function`、`observe` 三者互不依赖，各自只依赖 gateway 及其下层。
+- `platform` 依赖 core / document / security / rollout / engine / gateway / workflow / function / observe。
 
 | 模块 | Maven 坐标 | 内容 | 文件 | 测试 |
 | --- | --- | --- | ---: | ---: |
-| Core | `com.yin:open-platform-core` | 框架无关的契约：Agent Runtime、四种编排 pattern、Model/Tool/Memory/RAG 端口、ExecutionContext；另含最简身份类型与共享枚举 | 178 | 120 |
+| Core | `com.yin:open-platform-core` | 框架无关的契约：Agent Runtime、四种编排 pattern、Model/Tool/Memory/RAG 端口、ExecutionContext、`RagDocument` 载体；另含最简身份类型与共享枚举 | 179 | 120 |
 | Document | `com.yin:open-platform-document` | 文档解析（PDF/DOCX/XLSX/PPTX/HTML/Markdown/TXT）、清洗、分块、AST | 56 | 103 |
 | Security | `com.yin:open-platform-security` | JWT 过滤、敏感词 DFA、内部 API HMAC、Security 过滤链、Feature Flag | 15 | — |
 | Rollout | `com.yin:open-platform-rollout` | 灰度开关 | 2 | 1 |
 | **Engine** | `com.yin:open-platform-engine` | 执行引擎、超时与取消、任务管理、并发防护、`TaskCanceller` 端口；流式 packet 生产；共享 `AiMetrics` | 21 | 10 |
 | **Gateway** | `com.yin:open-platform-gateway` | 统一模型调用、过滤器链、模型路由与熔断、语义缓存、输入输出防护、`ToolCallbackResolver` 端口、结构化输出 | 117 | 187 |
 | **Workflow** | `com.yin:open-platform-workflow` | 步骤调度、阶段 Prompt、幂等存储、重试与 SSE 事件发布 | 58 | 8 |
+| **Function** | `com.yin:open-platform-function` | FunctionRegistry、函数调用协议与 Spring AI 适配、内置函数、步骤文本净化 | 19 | 15 |
+| **Observe** | `com.yin:open-platform-observe` | Trace 存储（内存 / Elasticsearch）、Trace 传播、Metrics、在线检索质量采样、Agent/RAG 评测 | 24 | 9 |
 | Quickstart | `com.yin:open-platform-quickstart` | 业务门面 `Agent` / `Result` / `ModelClients` | 3 | 8 |
-| Platform | **`com.yin:open-platform`** | Agent 编排、Memory、RAG、Function、Prompt、Observability、Adapters | 465 | 861 |
+| Platform | **`com.yin:open-platform`** | Agent 编排、Memory、RAG、Prompt、Runtime、Adapters | 421 | 837 |
 | Legacy | `com.yin:open-platform-legacy` | V1 → V2 迁移桥 | 2 | — |
 | Server | `com.yin:open-platform-server` | Spring Boot 自动配置入口（`AutoConfiguration.imports`） | 10 | 21 |
 | | | **合计** | **927** | **1319** |
 
-> 依赖 `com.yin:open-platform` 会传递带入 core / document / security / rollout / engine /
-> gateway / workflow。`platform` 仍是 9 个包的强连通块（agent ↔ memory ↔ adapter ↔ rag ↔
-> function ↔ observe ↔ prompt ↔ runtime ↔ knowledge），继续拆分需要先解这些环。
+> 依赖 `com.yin:open-platform` 会传递带入上述全部下层模块。`platform` 仍是 7 个包的强连通块
+> （adapter ↔ agent ↔ memory ↔ prompt ↔ rag ↔ runtime ↔ knowledge），继续拆分需要先解这些环。
 
 **作为消费者该引入哪个：**
 
@@ -776,15 +780,17 @@ open-platform/
 │   └── structured/             # StructuredToolGenerator（结构化输出，与 gateway 同模块）
 ├── workflow/src/main/java/com/yin/ai/platform/workflow/
 │   └── *                       # 步骤调度、阶段 Prompt、幂等存储、重试、SSE 发布
+├── function/src/main/java/com/yin/ai/platform/function/
+│   └── *                       # FunctionRegistry、内置函数、Spring AI 适配、StepTextCleaner
+├── observe/src/main/java/com/yin/ai/platform/observe/
+│   └── *                       # TraceStore（内存/ES）、Trace 过滤与传播、OnlineQualityRecorder、评测
 ├── quickstart/src/main/java/com/yin/ai/platform/quickstart/
 ├── platform/src/main/java/com/yin/ai/platform/
 │   ├── agent/                  # Agent 编排及历史兼容 API
 │   ├── memory/                 # Memory Runtime、检索、策略和观测
 │   ├── rag/                    # RAG、触发策略、grounding 和评测
-│   ├── function/               # Function Registry 与调用协议
 │   ├── runtime/                # Skill Runtime 和运行时适配
 │   ├── prompt/                 # Prompt Center、模板、片段和变量
-│   ├── observe/                # Trace、质量和评测
 │   ├── adapter/                # Spring、Redis、JDBC、向量库等基础设施适配器
 │   └── knowledge/              # 知识库接入
 ├── platform/src/main/resources/prompts/   # Prompt 变量和片段
@@ -812,8 +818,8 @@ mvn -pl platform -am test
 mvn verify
 ~~~
 
-各模块的测试分布：`gateway` 187、`core` 120、`document` 103、`platform` 861、`server` 21、
-`engine` 10、`workflow` 8、`quickstart` 8、`rollout` 1（合计 1319）。
+各模块的测试分布：`gateway` 187、`core` 120、`document` 103、`platform` 837、`server` 21、
+`function` 15、`engine` 10、`observe` 9、`workflow` 8、`quickstart` 8、`rollout` 1（合计 1319）。
 
 ### 纯 Java Smoke Test
 

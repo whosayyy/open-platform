@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 
 /**
  * 向量检索器 — 基于 LangChain4j EmbeddingStore 的 kNN 语义检索。

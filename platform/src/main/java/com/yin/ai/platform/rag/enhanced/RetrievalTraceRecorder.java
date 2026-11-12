@@ -1,6 +1,7 @@
 package com.yin.ai.platform.rag.enhanced;
 
 import java.util.List;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 
 /**
  * RAG 检索溯源记录器 — 每次检索完成后记录 trace + 文档明细。

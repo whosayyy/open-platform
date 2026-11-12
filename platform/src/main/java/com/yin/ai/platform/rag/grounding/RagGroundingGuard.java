@@ -2,7 +2,7 @@ package com.yin.ai.platform.rag.grounding;
 
 import com.yin.ai.platform.core.rag.grounding.ClaimCitationAnalyzer;
 import com.yin.ai.platform.rag.enhanced.EnhancedRagProperties;
-import com.yin.ai.platform.rag.enhanced.RetrievedDocument;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 import com.yin.ai.platform.rag.evaluation.RagOnlineJudge;
 import io.micrometer.core.instrument.DistributionSummary;
 import io.micrometer.core.instrument.MeterRegistry;

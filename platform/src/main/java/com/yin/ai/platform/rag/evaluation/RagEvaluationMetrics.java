@@ -1,6 +1,6 @@
 package com.yin.ai.platform.rag.evaluation;
 
-import com.yin.ai.platform.rag.enhanced.RetrievedDocument;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 
 import java.util.HashSet;
 import java.util.List;

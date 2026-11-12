@@ -6,7 +6,7 @@ import com.yin.ai.platform.agent.planner.Plan;
 import com.yin.ai.platform.agent.rag.AgentRagBridge;
 import com.yin.ai.platform.agent.reflector.NoOpReflector;
 import com.yin.ai.platform.rag.enhanced.RagRetrievalSnapshot;
-import com.yin.ai.platform.rag.enhanced.RetrievedDocument;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

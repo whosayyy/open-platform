@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 
 /**
  * LLM 精排器 — 用 LLM 对 RRF 融合后的候选文档进行语义相关性精排。

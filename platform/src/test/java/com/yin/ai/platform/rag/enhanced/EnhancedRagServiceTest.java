@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 
 /**
  * 【BUG 修复回归测试】EnhancedRagService.cleanRagQuery 剥离系统注入的时间上下文前缀。

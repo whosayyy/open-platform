@@ -52,6 +52,14 @@
             <groupId>com.yin</groupId>
             <artifactId>open-platform-workflow</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.yin</groupId>
+            <artifactId>open-platform-function</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yin</groupId>
+            <artifactId>open-platform-observe</artifactId>
+        </dependency>
 
         <!-- Spring Boot -->
         <dependency>

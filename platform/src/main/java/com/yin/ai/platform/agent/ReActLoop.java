@@ -11,7 +11,7 @@ import com.yin.ai.platform.agent.memory.AgentMemoryBridge;
 import com.yin.ai.platform.agent.rag.AgentRagBridge;
 import com.yin.ai.platform.agent.observer.Observation;
 import com.yin.ai.platform.observe.OnlineQualityRecorder;
-import com.yin.ai.platform.rag.enhanced.RetrievedDocument;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 import com.yin.ai.platform.rag.enhanced.RagRetrievalSnapshot;
 import com.yin.ai.platform.rag.trigger.RAGTriggerDecisionEngine;
 import com.yin.ai.platform.agent.observer.Observer;

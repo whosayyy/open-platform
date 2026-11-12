@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 
 /**
  * 企业级 RAG 增强服务 — 编排"问题重写→多路召回→RRF融合→LLM精排→上下文组装"全管道。

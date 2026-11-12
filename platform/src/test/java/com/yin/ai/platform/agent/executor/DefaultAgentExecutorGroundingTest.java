@@ -7,7 +7,7 @@ import com.yin.ai.platform.agent.trace.StepTraceRecorder;
 import com.yin.ai.platform.function.FunctionRegistry;
 import com.yin.ai.platform.gateway.GatewayResponse;
 import com.yin.ai.platform.gateway.UnifiedChatClient;
-import com.yin.ai.platform.rag.enhanced.RetrievedDocument;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 import com.yin.ai.platform.rag.grounding.RagGroundingGuard;
 import org.junit.jupiter.api.Test;
 

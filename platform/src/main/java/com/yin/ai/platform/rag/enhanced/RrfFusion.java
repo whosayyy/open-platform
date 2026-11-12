@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 
 /**
  * RRF (Reciprocal Rank Fusion) 融合器 — 将多路召回结果按排名融合。

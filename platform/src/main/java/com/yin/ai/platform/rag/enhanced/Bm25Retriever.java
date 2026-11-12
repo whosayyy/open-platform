@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 
 /**
  * BM25 检索器 — 基于 IK 中文分词的 Elasticsearch 关键词检索。

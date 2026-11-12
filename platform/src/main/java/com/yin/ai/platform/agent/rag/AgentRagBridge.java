@@ -1,6 +1,6 @@
 package com.yin.ai.platform.agent.rag;
 
-import com.yin.ai.platform.rag.enhanced.RetrievedDocument;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 import com.yin.ai.platform.rag.enhanced.RagRetrievalSnapshot;
 
 import java.util.List;

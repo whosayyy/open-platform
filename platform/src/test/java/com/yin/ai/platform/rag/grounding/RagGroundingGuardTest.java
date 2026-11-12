@@ -1,7 +1,7 @@
 package com.yin.ai.platform.rag.grounding;
 
 import com.yin.ai.platform.rag.enhanced.EnhancedRagProperties;
-import com.yin.ai.platform.rag.enhanced.RetrievedDocument;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 import com.yin.ai.platform.rag.evaluation.RagOnlineJudge;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

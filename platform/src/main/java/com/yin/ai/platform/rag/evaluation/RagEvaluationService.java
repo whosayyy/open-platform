@@ -3,7 +3,7 @@ package com.yin.ai.platform.rag.evaluation;
 import com.yin.ai.platform.core.rag.evaluation.RagEvaluationDataset;
 import com.yin.ai.platform.core.rag.evaluation.RagEvaluationResult;
 import com.yin.ai.platform.rag.enhanced.EnhancedRagService;
-import com.yin.ai.platform.rag.enhanced.RetrievedDocument;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

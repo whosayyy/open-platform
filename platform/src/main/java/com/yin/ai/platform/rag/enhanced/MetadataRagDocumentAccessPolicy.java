@@ -2,6 +2,7 @@ package com.yin.ai.platform.rag.enhanced;
 
 import com.yin.ai.platform.rollout.RoadmapFeatureProperties;
 import org.springframework.stereotype.Component;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 
 /** Rechecks namespace metadata so a retriever or stale projection cannot bypass isolation. */
 @Component

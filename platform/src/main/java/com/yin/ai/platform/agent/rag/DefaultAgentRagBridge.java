@@ -1,7 +1,7 @@
 package com.yin.ai.platform.agent.rag;
 
 import com.yin.ai.platform.rag.enhanced.EnhancedRagService;
-import com.yin.ai.platform.rag.enhanced.RetrievedDocument;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 import com.yin.ai.platform.rag.enhanced.RagRetrievalSnapshot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;

@@ -1,4 +1,4 @@
-package com.yin.ai.platform.agent.pattern;
+package com.yin.ai.platform.function;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

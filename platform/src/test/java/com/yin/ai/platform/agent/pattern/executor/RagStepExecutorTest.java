@@ -4,7 +4,7 @@ import com.yin.ai.platform.core.runtime.step.StepExecutorResult;
 import com.yin.ai.platform.agent.pattern.AgentExecutionContext;
 import com.yin.ai.platform.rag.enhanced.EnhancedRagService;
 import com.yin.ai.platform.rag.enhanced.RagRetrievalSnapshot;
-import com.yin.ai.platform.rag.enhanced.RetrievedDocument;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

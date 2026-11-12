@@ -36,6 +36,8 @@
         <module>engine</module>
         <module>gateway</module>
         <module>workflow</module>
+        <module>function</module>
+        <module>observe</module>
         <module>quickstart</module>
         <module>platform</module>
         <module>legacy</module>
@@ -174,6 +176,16 @@
             <dependency>
                 <groupId>com.yin</groupId>
                 <artifactId>open-platform-workflow</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yin</groupId>
+                <artifactId>open-platform-function</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yin</groupId>
+                <artifactId>open-platform-observe</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

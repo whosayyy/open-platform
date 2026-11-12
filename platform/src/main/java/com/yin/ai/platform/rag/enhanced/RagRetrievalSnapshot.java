@@ -1,6 +1,7 @@
 package com.yin.ai.platform.rag.enhanced;
 
 import java.util.List;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 
 /**
  * 一次 RAG 检索的不可变快照。

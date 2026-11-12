@@ -1,7 +1,7 @@
 package com.yin.ai.platform.observe;
 
 import com.yin.ai.platform.core.memory.api.QueryResult;
-import com.yin.ai.platform.rag.enhanced.RetrievedDocument;
+import com.yin.ai.platform.core.rag.RetrievedDocument;
 
 import java.util.List;
 

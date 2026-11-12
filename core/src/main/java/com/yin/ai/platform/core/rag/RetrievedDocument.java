@@ -1,4 +1,4 @@
-package com.yin.ai.platform.rag.enhanced;
+package com.yin.ai.platform.core.rag;
 
 import java.util.Map;
 
