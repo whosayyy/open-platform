@@ -1,4 +1,4 @@
-package com.yin.ai.platform.agent.pattern.config;
+package com.yin.ai.platform.adapter.wiring;
 
 import com.yin.ai.platform.agent.ReActLoop;
 import com.yin.ai.platform.adapter.runtime.persistence.RedisContextStore;

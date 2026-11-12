@@ -1,4 +1,4 @@
-package com.yin.ai.platform.memory.config;
+package com.yin.ai.platform.adapter.wiring;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import com.yin.ai.platform.gateway.GatewayMessage;
@@ -66,6 +66,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import com.yin.ai.platform.memory.config.MemoryProperties;
 
 @Configuration
 @EnableConfigurationProperties(MemoryProperties.class)

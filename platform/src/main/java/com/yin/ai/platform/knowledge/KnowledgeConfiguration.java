@@ -1,7 +1,7 @@
 package com.yin.ai.platform.knowledge;
 
 import com.yin.ai.platform.engine.metrics.AiMetrics;
-import com.yin.ai.platform.adapter.rag.config.RAGProperties;
+import com.yin.ai.platform.rag.RAGProperties;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.store.embedding.EmbeddingStore;

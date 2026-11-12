@@ -1,4 +1,4 @@
-package com.yin.ai.platform.adapter.rag.config;
+package com.yin.ai.platform.rag;
 
 import lombok.Data;
 

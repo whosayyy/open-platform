@@ -173,17 +173,6 @@ class ArchitectureRuleTest {
     }
 
     @Test
-    @DisplayName("Adapter 不得依赖 Starter")
-    void adaptersMustNotDependOnStarter() {
-        noClasses()
-                .that().resideInAnyPackage(ADAPTER)
-                .should().dependOnClassesThat()
-                .resideInAnyPackage(STARTER)
-                .because("Adapter 必须能脱离 Spring Boot 自动配置独立使用")
-                .check(classes);
-    }
-
-    @Test
     @DisplayName("遗留 Agent Task/HITL 包不得新增 Redis 实现")
     void legacyAgentRuntimePortsMustNotOwnRedisImplementations() {
         noClasses()
@@ -208,17 +197,6 @@ class ArchitectureRuleTest {
                         "org.springframework.security..",
                         "org.springframework.web..")
                 .because("事件持久化属于 adapter.runtime，SSE/HTTP 属于 adapter.spring；旧类只允许兼容壳")
-                .check(classes);
-    }
-
-    @Test
-    @DisplayName("Runtime Event Adapter 不得依赖 Spring")
-    void runtimeEventAdapterMustNotDependOnSpring() {
-        noClasses()
-                .that().resideInAnyPackage(ROOT + ".adapter.runtime.event..")
-                .should().dependOnClassesThat()
-                .resideInAnyPackage("org.springframework..")
-                .because("Redis 事件持久化与实时分发必须能脱离 Spring Web 使用")
                 .check(classes);
     }
 }

@@ -1,4 +1,4 @@
-package com.yin.ai.platform.adapter.memory.context;
+package com.yin.ai.platform.memory;
 
 import com.yin.ai.platform.core.memory.MemoryContext;
 import com.yin.ai.platform.engine.ExecutionContext;

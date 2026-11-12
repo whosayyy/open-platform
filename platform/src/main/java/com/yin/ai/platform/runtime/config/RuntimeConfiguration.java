@@ -14,7 +14,7 @@ import com.yin.ai.platform.runtime.DefaultSkillRuntime;
 import com.yin.ai.platform.runtime.ResponseParser;
 import com.yin.ai.platform.runtime.SkillRuntime;
 import com.yin.ai.platform.runtime.postprocess.ResponsePostProcessorChain;
-import com.yin.ai.platform.adapter.skill.composer.PromptComposer;
+import com.yin.ai.platform.runtime.PromptComposer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

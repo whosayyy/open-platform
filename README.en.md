@@ -450,7 +450,7 @@ core
                                         │
                      platform <─────────┘
                        ├──> legacy
-                       └──> server（also depends on core and quickstart）
+                       └──> adapter ──> server (also depends on core / quickstart / legacy)
 ```
 
 Dependency notes:
@@ -461,6 +461,8 @@ Dependency notes:
   gateway and the layers below it.
 - `platform` depends on core / document / security / rollout / engine / gateway / workflow /
   function / observe.
+- **`adapter` sits above `platform`**: it implements the ports platform defines, and platform
+  never depends on it.
 
 | Module | Coordinates | Contents | Files | Tests |
 | --- | --- | --- | ---: | ---: |
@@ -474,14 +476,17 @@ Dependency notes:
 | **Function** | `com.yin:open-platform-function` | FunctionRegistry, function invocation protocol and Spring AI adapter, built-in functions, step text cleaner | 19 | 15 |
 | **Observe** | `com.yin:open-platform-observe` | Trace stores (in-memory / Elasticsearch), trace propagation, metrics, online retrieval-quality sampling, Agent/RAG evaluation | 24 | 9 |
 | Quickstart | `com.yin:open-platform-quickstart` | Business facade: `Agent` / `Result` / `ModelClients` | 3 | 8 |
-| Platform | **`com.yin:open-platform`** | Agent orchestration, memory, RAG, prompt, runtime, adapters | 421 | 837 |
+| Platform | **`com.yin:open-platform`** | Agent orchestration, memory, RAG, prompt, runtime, knowledge | 380 | 737 |
+| **Adapter** | `com.yin:open-platform-adapter` | Redis task/context/memory stores, Elasticsearch memory search, LangChain4j embedding, SSE/HTTP transport, composition root (`adapter.wiring`), deprecated compatibility shells | 41 | 100 |
 | Legacy | `com.yin:open-platform-legacy` | V1 → V2 migration bridge | 2 | — |
 | Server | `com.yin:open-platform-server` | Spring Boot auto-configuration entry | 10 | 21 |
 | | | **Total** | **927** | **1319** |
 
-> Depending on `com.yin:open-platform` transitively brings in every module above. `platform` is
-> still a 7-package strongly connected block (adapter ↔ agent ↔ memory ↔ prompt ↔ rag ↔ runtime ↔
-> knowledge); further splitting requires breaking those cycles first.
+> Depending on `com.yin:open-platform` transitively brings in every module below it; Spring Boot
+> applications should depend on `open-platform-server`, which also brings the adapter wiring.
+>
+> `platform` is still a 6-package strongly connected block (agent ↔ memory ↔ prompt ↔ rag ↔
+> runtime ↔ knowledge); further splitting requires breaking those cycles first.
 
 **Which artifact to depend on:**
 
@@ -550,8 +555,11 @@ open-platform/
 ├── platform/src/main/java/com/yin/ai/platform/
 │   ├── agent/ memory/ rag/ runtime/
 │   ├── prompt/ knowledge/
-│   └── adapter/                # Spring, Redis, JDBC, vector store adapters
 ├── platform/src/main/resources/prompts/
+├── adapter/src/main/java/com/yin/ai/platform/
+│   ├── adapter/                # memory/rag/runtime/router/skill/spring concrete implementations
+│   ├── adapter/wiring/         # composition root: wires Redis/ES implementations into the runtime
+│   └── agent/{event,hitl,task}/    # deprecated compatibility shells (FQCN preserved)
 ├── legacy/src/main/java/com/yin/ai/platform/legacy/
 └── server/
     ├── src/main/java/com/yin/ai/platform/starter/
@@ -576,8 +584,9 @@ mvn -pl platform -am test
 mvn verify
 ```
 
-Test distribution: `gateway` 187, `core` 120, `document` 103, `platform` 837, `server` 21,
-`function` 15, `engine` 10, `observe` 9, `workflow` 8, `quickstart` 8, `rollout` 1 (1319 total).
+Test distribution: `gateway` 187, `core` 120, `document` 103, `adapter` 100, `platform` 737,
+`server` 21, `function` 15, `engine` 10, `observe` 9, `workflow` 8, `quickstart` 8, `rollout` 1
+(1319 total).
 
 ### Plain Java smoke test
 

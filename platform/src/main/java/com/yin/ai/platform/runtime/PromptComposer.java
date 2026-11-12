@@ -1,4 +1,4 @@
-package com.yin.ai.platform.adapter.skill.composer;
+package com.yin.ai.platform.runtime;
 
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;

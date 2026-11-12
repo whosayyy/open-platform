@@ -29,7 +29,7 @@ import com.yin.ai.platform.starter.router.RouterProperties;
 import com.yin.ai.platform.starter.router.YamlKeywordIntentProvider;
 import com.yin.ai.platform.runtime.SkillResult;
 import com.yin.ai.platform.runtime.SkillRuntime;
-import com.yin.ai.platform.adapter.skill.composer.PromptComposer;
+import com.yin.ai.platform.runtime.PromptComposer;
 import com.yin.ai.platform.adapter.skill.repository.ClasspathSkillRepository;
 import com.yin.ai.platform.core.skill.repository.SkillRepository;
 import com.yin.ai.platform.core.skill.resolver.DependencyResolver;

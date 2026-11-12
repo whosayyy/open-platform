@@ -1,7 +1,7 @@
 package com.yin.ai.platform.rag.config;
 
-import com.yin.ai.platform.adapter.rag.embedding.DocumentIngestor;
-import com.yin.ai.platform.adapter.rag.config.RAGProperties;
+import com.yin.ai.platform.rag.DocumentIngestor;
+import com.yin.ai.platform.rag.RAGProperties;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.embedding.onnx.bgesmallzh.BgeSmallZhEmbeddingModel;
 import dev.langchain4j.model.embedding.EmbeddingModel;

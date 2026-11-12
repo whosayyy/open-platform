@@ -29,6 +29,10 @@
         </dependency>
         <dependency>
             <groupId>com.yin</groupId>
+            <artifactId>open-platform-adapter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yin</groupId>
             <artifactId>open-platform-quickstart</artifactId>
         </dependency>
 

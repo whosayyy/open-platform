@@ -1,7 +1,7 @@
 package com.yin.ai.platform.starter.skill;
 
 import com.yin.ai.platform.function.FunctionRegistry;
-import com.yin.ai.platform.adapter.skill.composer.PromptComposer;
+import com.yin.ai.platform.runtime.PromptComposer;
 import com.yin.ai.platform.adapter.skill.repository.ClasspathSkillRepository;
 import com.yin.ai.platform.core.skill.DefaultSkillLoader;
 import com.yin.ai.platform.core.skill.SkillLoader;

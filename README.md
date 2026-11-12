@@ -692,7 +692,7 @@ core
                                         │
                      platform <─────────┘
                        ├──> legacy
-                       └──> server（同时依赖 core 与 quickstart）
+                       └──> adapter ──> server（同时依赖 core / quickstart / legacy）
 ```
 
 依赖要点：
@@ -701,6 +701,7 @@ core
 - `gateway`（含 `structured`）依赖 `core` / `engine` / `security` / `rollout`。
 - `workflow`、`function`、`observe` 三者互不依赖，各自只依赖 gateway 及其下层。
 - `platform` 依赖 core / document / security / rollout / engine / gateway / workflow / function / observe。
+- **`adapter` 位于 `platform` 之上**：它实现 platform 定义的端口，platform 不反向依赖它。
 
 | 模块 | Maven 坐标 | 内容 | 文件 | 测试 |
 | --- | --- | --- | ---: | ---: |
@@ -714,13 +715,17 @@ core
 | **Function** | `com.yin:open-platform-function` | FunctionRegistry、函数调用协议与 Spring AI 适配、内置函数、步骤文本净化 | 19 | 15 |
 | **Observe** | `com.yin:open-platform-observe` | Trace 存储（内存 / Elasticsearch）、Trace 传播、Metrics、在线检索质量采样、Agent/RAG 评测 | 24 | 9 |
 | Quickstart | `com.yin:open-platform-quickstart` | 业务门面 `Agent` / `Result` / `ModelClients` | 3 | 8 |
-| Platform | **`com.yin:open-platform`** | Agent 编排、Memory、RAG、Prompt、Runtime、Adapters | 421 | 837 |
+| Platform | **`com.yin:open-platform`** | Agent 编排、Memory、RAG、Prompt、Runtime、Knowledge | 380 | 737 |
+| **Adapter** | `com.yin:open-platform-adapter` | Redis 任务/上下文/记忆存储、Elasticsearch 记忆检索、LangChain4j Embedding、SSE/HTTP 传输、组合根（`adapter.wiring`）、deprecated 兼容壳 | 41 | 100 |
 | Legacy | `com.yin:open-platform-legacy` | V1 → V2 迁移桥 | 2 | — |
 | Server | `com.yin:open-platform-server` | Spring Boot 自动配置入口（`AutoConfiguration.imports`） | 10 | 21 |
 | | | **合计** | **927** | **1319** |
 
-> 依赖 `com.yin:open-platform` 会传递带入上述全部下层模块。`platform` 仍是 7 个包的强连通块
-> （adapter ↔ agent ↔ memory ↔ prompt ↔ rag ↔ runtime ↔ knowledge），继续拆分需要先解这些环。
+> 依赖 `com.yin:open-platform` 会传递带入上述全部下层模块；Spring Boot 应用请直接依赖
+> `open-platform-server`（它把 adapter 的装配也带进来）。
+>
+> `platform` 仍是 6 个包的强连通块（agent ↔ memory ↔ prompt ↔ rag ↔ runtime ↔ knowledge），
+> 继续拆分需要先解这些环。
 
 **作为消费者该引入哪个：**
 
@@ -789,11 +794,15 @@ open-platform/
 │   ├── agent/                  # Agent 编排及历史兼容 API
 │   ├── memory/                 # Memory Runtime、检索、策略和观测
 │   ├── rag/                    # RAG、触发策略、grounding 和评测
-│   ├── runtime/                # Skill Runtime 和运行时适配
+│   ├── runtime/                # Skill Runtime、PromptComposer
 │   ├── prompt/                 # Prompt Center、模板、片段和变量
-│   ├── adapter/                # Spring、Redis、JDBC、向量库等基础设施适配器
 │   └── knowledge/              # 知识库接入
 ├── platform/src/main/resources/prompts/   # Prompt 变量和片段
+├── adapter/src/main/java/com/yin/ai/platform/
+│   ├── adapter/                # memory/rag/runtime/router/skill/spring 等具体实现
+│   ├── adapter/wiring/         # 组合根：装配 Redis/ES 实现进运行时
+│   ├── agent/{event,hitl,task}/    # deprecated 兼容壳（保留 FQCN，仅继承 adapter 实现）
+│   └── ...                     # 兼容壳与原包同名，便于旧代码零改动迁移
 ├── legacy/src/main/java/com/yin/ai/platform/legacy/
 └── server/
     ├── src/main/java/com/yin/ai/platform/starter/
@@ -818,8 +827,8 @@ mvn -pl platform -am test
 mvn verify
 ~~~
 
-各模块的测试分布：`gateway` 187、`core` 120、`document` 103、`platform` 837、`server` 21、
-`function` 15、`engine` 10、`observe` 9、`workflow` 8、`quickstart` 8、`rollout` 1（合计 1319）。
+各模块的测试分布：`gateway` 187、`core` 120、`document` 103、`adapter` 100、`platform` 737、
+`server` 21、`function` 15、`engine` 10、`observe` 9、`workflow` 8、`quickstart` 8、`rollout` 1（合计 1319）。
 
 ### 纯 Java Smoke Test
 

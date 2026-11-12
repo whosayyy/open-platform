@@ -1,6 +1,6 @@
 package com.yin.ai.platform.memory.integration;
 
-import com.yin.ai.platform.adapter.memory.context.LegacyMemoryContextMapper;
+import com.yin.ai.platform.memory.LegacyMemoryContextMapper;
 import com.yin.ai.platform.engine.ExecutionContext;
 import com.yin.ai.platform.core.memory.api.MemoryRuntime;
 import com.yin.ai.platform.core.memory.MemoryContext;

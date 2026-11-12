@@ -1,6 +1,6 @@
 package com.yin.ai.platform.rag;
 
-import com.yin.ai.platform.adapter.rag.config.RAGProperties;
+import com.yin.ai.platform.rag.RAGProperties;
 import com.yin.ai.platform.core.rag.document.WkcDocument;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.Refresh;

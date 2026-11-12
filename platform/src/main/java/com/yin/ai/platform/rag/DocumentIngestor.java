@@ -1,6 +1,6 @@
-package com.yin.ai.platform.adapter.rag.embedding;
+package com.yin.ai.platform.rag;
 
-import com.yin.ai.platform.adapter.rag.config.RAGProperties;
+import com.yin.ai.platform.rag.RAGProperties;
 import com.yin.ai.platform.document.model.DocumentSegment;
 import com.yin.ai.platform.document.model.ParsedDocument;
 import com.yin.ai.platform.document.model.DocumentType;

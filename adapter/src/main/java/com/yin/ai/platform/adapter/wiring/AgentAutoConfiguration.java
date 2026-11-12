@@ -1,4 +1,4 @@
-package com.yin.ai.platform.agent.config;
+package com.yin.ai.platform.adapter.wiring;
 
 import com.yin.ai.platform.agent.ReActLoop;
 import com.yin.ai.platform.agent.executor.AgentExecutor;

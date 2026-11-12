@@ -1,4 +1,4 @@
-package com.yin.ai.platform.adapter.skill.composer;
+package com.yin.ai.platform.runtime;
 
 import com.yin.ai.platform.prompt.PromptCenter;
 import org.junit.jupiter.api.BeforeEach;

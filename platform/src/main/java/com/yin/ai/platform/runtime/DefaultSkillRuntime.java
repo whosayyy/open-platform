@@ -21,7 +21,7 @@ import com.yin.ai.platform.engine.metrics.AiMetrics;
 import com.yin.ai.platform.observe.RouterFirstMonitor;
 import com.yin.ai.platform.knowledge.KnowledgeRegistry;
 import com.yin.ai.platform.runtime.postprocess.ResponsePostProcessorChain;
-import com.yin.ai.platform.adapter.skill.composer.PromptComposer;
+import com.yin.ai.platform.runtime.PromptComposer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import reactor.core.publisher.Flux;

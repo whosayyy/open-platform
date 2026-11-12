@@ -1,6 +1,6 @@
 package com.yin.ai.platform.agent.memory;
 
-import com.yin.ai.platform.adapter.memory.context.LegacyMemoryContextMapper;
+import com.yin.ai.platform.memory.LegacyMemoryContextMapper;
 import com.yin.ai.platform.agent.AgentContext;
 import com.yin.ai.platform.agent.executor.StepResult;
 import com.yin.ai.platform.agent.observer.Observation;
